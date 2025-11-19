@@ -1,4 +1,3 @@
-# .github/workflows/dart.yml (ref 3ae41940ef678738b69e39a20e2efd41dcbd3c78)
 name: Dart (Flutter)
 
 on:
@@ -14,21 +13,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Bumped cache key suffix to avoid reusing possibly corrupted cache
-      - name: Cache pub dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.pub-cache
-          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}-v2
-          restore-keys: |
-            ${{ runner.os }}-pub-
+      # TEMPORARILY disabled cache to avoid restoring corrupted archives.
+      # Re-enable with a new key after successful run.
+      # - name: Cache pub dependencies
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ~/.pub-cache
+      #     key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}-v2
+      #     restore-keys: |
+      #       ${{ runner.os }}-pub-
 
-      # Use subosito action (alternative) and pin a concrete version.
-      # Replace '3.9.2' below with the exact Flutter release you want.
-      - name: Set up Flutter
+      - name: Set up Flutter (pin a concrete release)
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.9.2'
+          flutter-version: '3.10.6'   # pin a concrete release
 
       - name: Verify Flutter & Dart
         run: |
