@@ -22,12 +22,18 @@ jobs:
             ${{ runner.os }}-pub-
 
       - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+        uses: flutter-actions/setup-flutter@v2
         with:
-          flutter-version: '3.9.2'   # <-- pin to a specific version; update to the version you want
+          channel: stable
+          version: '3.9.2'   # pin to the Flutter release you need (or change to another release that bundles the required Dart SDK)
 
-      - name: Install dependencies
-        run: flutter pub get
+      - name: Install dependencies (with retry)
+        run: |
+          for i in 1 2 3; do
+            flutter pub get && break
+            echo "flutter pub get failed; retrying ($i)..."
+            sleep $((i * 5))
+          done
 
       - name: Analyze project source
         run: flutter analyze
