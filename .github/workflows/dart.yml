@@ -1,3 +1,4 @@
+# .github/workflows/dart.yml (ref 3ae41940ef678738b69e39a20e2efd41dcbd3c78)
 name: Dart (Flutter)
 
 on:
@@ -13,26 +14,35 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Bumped cache key suffix to avoid reusing possibly corrupted cache
       - name: Cache pub dependencies
         uses: actions/cache@v4
         with:
           path: ~/.pub-cache
-          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}-v2
           restore-keys: |
             ${{ runner.os }}-pub-
 
+      # Use subosito action (alternative) and pin a concrete version.
+      # Replace '3.9.2' below with the exact Flutter release you want.
       - name: Set up Flutter
-        uses: flutter-actions/setup-flutter@v2
+        uses: subosito/flutter-action@v2
         with:
-          channel: stable
-          version: '3.9.2'   # pin to the Flutter release you need (or change to another release that bundles the required Dart SDK)
+          flutter-version: '3.9.2'
+
+      - name: Verify Flutter & Dart
+        run: |
+          echo "=== flutter --version ==="
+          flutter --version
+          echo "=== dart --version ==="
+          dart --version
 
       - name: Install dependencies (with retry)
         run: |
           for i in 1 2 3; do
             flutter pub get && break
             echo "flutter pub get failed; retrying ($i)..."
-            sleep $((i * 5))
+            sleep $((i * 10))
           done
 
       - name: Analyze project source
