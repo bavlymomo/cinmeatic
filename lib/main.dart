@@ -1,20 +1,37 @@
-import 'package:cinmeatic/home_page.dart';
-import 'package:cinmeatic/login.dart';
-import 'package:cinmeatic/splach.dart';
+import 'package:cinmeatic/presentations/screens/home_page.dart';
+import 'package:cinmeatic/presentations/screens/login.dart';
+import 'package:cinmeatic/presentations/screens/splach.dart';
+import 'package:cinmeatic/presentations/screens/navigation_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Splach(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xff06041F),
+          textTheme: const TextTheme(
+              headlineMedium: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+              bodySmall: TextStyle(fontSize: 12, color: Colors.grey),
+              labelSmall: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14))),
+      home: const Splach(),
       routes: {
-        '/home': (context) => HomePage(),
-        '/login': (context) => Login(),
+        '/home': (context) => const HomePage(),
+        '/login': (context) => const Login(),
+        '/navigation': (context) => const NavigationPage(),
       },
     );
   }

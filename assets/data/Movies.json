@@ -1,0 +1,169 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "Inception",
+      "image": "images/inception.jpeg",
+      "rating": 8.8,
+      "release_date": "2010-07-16",
+      "duration": "2h 28m",
+      "genres": ["Sci-Fi", "Action", "Thriller"],
+      "language": "English",
+      "overview": "A thief who steals corporate secrets through dream-sharing technology is given a final chance at redemption."
+    },
+    {
+      "id": 2,
+      "title": "The Dark Knight",
+      "image": "images/Darknight.jpeg",
+      "rating": 9.0,
+      "release_date": "2008-07-18",
+      "duration": "2h 32m",
+      "genres": ["Action", "Crime", "Drama"],
+      "language": "English",
+      "overview": "Batman faces the Joker, a criminal mastermind who plunges Gotham City into chaos."
+    },
+    {
+      "id": 3,
+      "title": "Interstellar",
+      "image": "images/inception.jpeg",
+      "rating": 8.6,
+      "release_date": "2014-11-07",
+      "duration": "2h 49m",
+      "genres": ["Sci-Fi", "Drama", "Adventure"],
+      "language": "English",
+      "overview": "A team of explorers travel through a wormhole in space to ensure humanity's survival."
+    },
+    {
+      "id": 4,
+      "title": "Avengers: Endgame",
+      "image": "images/Avengers Endgame.jpeg",
+      "rating": 8.4,
+      "release_date": "2019-04-26",
+      "duration": "3h 2m",
+      "genres": ["Action", "Adventure", "Sci-Fi"],
+      "language": "English",
+      "overview": "The Avengers assemble once more to reverse Thanos' actions and restore balance."
+    },
+    {
+      "id": 5,
+      "title": "Titanic",
+      "image": "images/Titanic.jpeg",
+      "rating": 7.9,
+      "release_date": "1997-12-19",
+      "duration": "3h 14m",
+      "genres": ["Romance", "Drama"],
+      "language": "English",
+      "overview": "A love story unfolds aboard the ill-fated RMS Titanic."
+    },
+    {
+      "id": 6,
+      "title": "Gladiator",
+      "image": "images/Gladiator.jpeg",
+      "rating": 8.5,
+      "release_date": "2000-05-05",
+      "duration": "2h 35m",
+      "genres": ["Action", "Drama", "History"],
+      "language": "English",
+      "overview": "A former Roman general seeks revenge after being betrayed."
+    },
+    {
+      "id": 7,
+      "title": "Joker",
+      "image": "images/Joker.jpeg",
+      "rating": 8.4,
+      "release_date": "2019-10-04",
+      "duration": "2h 2m",
+      "genres": ["Crime", "Drama", "Thriller"],
+      "language": "English",
+      "overview": "A mentally troubled comedian embarks on a downward spiral into madness."
+    },
+    {
+      "id": 8,
+      "title": "Forrest Gump",
+      "image": "images/Forrest Gump.jpeg",
+      "rating": 8.8,
+      "release_date": "1994-07-06",
+      "duration": "2h 22m",
+      "genres": ["Drama", "Romance"],
+      "language": "English",
+      "overview": "The life story of a simple man with a big heart."
+    },
+    {
+      "id": 9,
+      "title": "The Matrix",
+      "image": "images/The Matrix.jpeg",
+      "rating": 8.7,
+      "release_date": "1999-03-31",
+      "duration": "2h 16m",
+      "genres": ["Sci-Fi", "Action"],
+      "language": "English",
+      "overview": "A hacker discovers the shocking truth about reality."
+    },
+    {
+      "id": 10,
+      "title": "Parasite",
+      "image": "images/Parasite.jpeg",
+      "rating": 8.6,
+      "release_date": "2019-05-30",
+      "duration": "2h 12m",
+      "genres": ["Drama", "Thriller"],
+      "language": "Korean",
+      "overview": "A poor family schemes to become employed by a wealthy household."
+    },
+    {
+      "id": 11,
+      "title": "The Shawshank Redemption",
+      "image": "images/The Shawshank Redemption.jpeg",
+      "rating": 9.3,
+      "release_date": "1994-09-23",
+      "duration": "2h 22m",
+      "genres": ["Drama"],
+      "language": "English",
+      "overview": "Two imprisoned men bond over years, finding redemption through hope."
+    },
+    {
+      "id": 12,
+      "title": "Fight Club",
+      "image": "images/Fight-Club.jpeg",
+      "rating": 8.8,
+      "release_date": "1999-10-15",
+      "duration": "2h 19m",
+      "genres": ["Drama", "Thriller"],
+      "language": "English",
+      "overview": "An insomniac office worker forms an underground fight club."
+    },
+    {
+      "id": 13,
+      "title": "Avatar",
+      "image": "images/Avatar.jpeg",
+      "rating": 7.9,
+      "release_date": "2009-12-18",
+      "duration": "2h 42m",
+      "genres": ["Action", "Adventure", "Fantasy"],
+      "language": "English",
+      "overview": "A marine on an alien planet becomes torn between duty and conscience."
+    },
+    {
+      "id": 14,
+      "title": "John Wick",
+      "image": "images/John-Wick.jpeg",
+      "rating": 7.4,
+      "release_date": "2014-10-24",
+      "duration": "1h 41m",
+      "genres": ["Action", "Crime", "Thriller"],
+      "language": "English",
+      "overview": "An ex-hitman comes out of retirement to track down gangsters."
+    },
+    {
+      "id": 15,
+      "title": "Spider-Man: No Way Home",
+      "image": "images/Spider-Man No Way Home.jpeg",
+      "rating": 8.3,
+      "release_date": "2021-12-17",
+      "duration": "2h 28m",
+      "genres": ["Action", "Adventure", "Fantasy"],
+      "language": "English",
+      "overview": "Spider-Man seeks help when his identity is revealed to the world."
+    }
+  ]
+}
