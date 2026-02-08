@@ -1,11 +1,13 @@
 import 'package:cinmeatic/data/Models/movie.dart';
 import 'package:cinmeatic/data/data_source/movie_list_api.dart';
-import 'package:cinmeatic/presentations/Widgets/homeWidgets/customList.dart';
-import 'package:cinmeatic/presentations/Widgets/homeWidgets/infoRow.dart';
-import 'package:cinmeatic/presentations/Widgets/homeWidgets/movieCard.dart';
-import 'package:cinmeatic/presentations/Widgets/homeWidgets/myCarouselSlider.dart';
-import 'package:flutter/material.dart';
+import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
+import 'package:cinmeatic/presentations/widgets/home_widgets/custom_list.dart';
+import 'package:cinmeatic/presentations/widgets/home_widgets/info_row.dart';
+import 'package:cinmeatic/presentations/widgets/home_widgets/movie_card.dart';
 
+import 'package:cinmeatic/presentations/widgets/home_widgets/my_carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,12 +18,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> images = List.generate(6, (e) => "images/${e + 1}.jpeg");
-  late Future<List<Movie>> myMoviesList;
+  late List<Movie> myMoviesList;
 
   @override
   void initState() {
     super.initState();
-    myMoviesList = MovielistApi.loadJson();
+    context.read<MoviesCubit>().fetchMovies();
   }
 
   @override
@@ -38,38 +40,33 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Mycarouselslider(images: images),
-            FutureBuilder(
-              future: myMoviesList,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
+            BlocBuilder<MoviesCubit, MoviesState>(
+              builder: (context, state) {
+                if (state.isLoading) {
                   return const CircularProgressIndicator();
                 }
-                if (snapshot.hasError) {
+                if (state.errorMsg != null) {
                   return Text(
-                    snapshot.error.toString(),
-                    style: const TextStyle(color: Colors.white),
+                    state.errorMsg!,
+                    style: Theme.of(context).textTheme.labelSmall,
                   );
                 }
-                if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Text(
-                    "There Is No Data",
-                    style: TextStyle(color: Colors.white),
-                  );
+                if (state.allmovies.isEmpty) {
+                  return Text("Data not found ",
+                      style: Theme.of(context).textTheme.labelSmall);
                 } else {
-                  List<Movie> listMovies = snapshot.data!;
-                  List<Movie> lessMovies = listMovies.take(5).toList();
-                  List<Movie> latestMovie = listMovies.sublist(5, 10).toList();
-                  List<Movie> mostPopular = listMovies.sublist(10, 15).toList();
+                  List<Movie> lessMovies = state.allmovies.take(5).toList();
+                  List<Movie> mostPopular =
+                      state.allmovies.sublist(6, 10).toList();
+                  List<Movie> latestMovie =
+                      state.allmovies.sublist(10, 15).toList();
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            top: screenHeight * 0.05,
-                            bottom: screenHeight * 0.02),
-                        child: Text("Last watched",
-                            style: Theme.of(context).textTheme.headlineMedium),
-                      ),
+                      InfoRow(
+                          screenHeight: screenHeight,
+                          screenWidth: screenWidth,
+                          title: "Last watched"),
                       SizedBox(
                         height: cardHeight,
                         child: ListView.separated(
@@ -96,19 +93,23 @@ class _HomePageState extends State<HomePage> {
                         title: 'Latest Movies',
                       ),
                       CustomeList(
-                          screenHeight: screenHeight, MoviesList: latestMovie),
+                        screenHeight: screenHeight,
+                        moviesList: latestMovie,
+                      ),
                       InfoRow(
                         screenHeight: screenHeight,
                         screenWidth: screenWidth,
                         title: 'Most Popular',
                       ),
                       CustomeList(
-                          screenHeight: screenHeight, MoviesList: mostPopular),
+                        screenHeight: screenHeight,
+                        moviesList: mostPopular,
+                      ),
                     ],
                   );
                 }
               },
-            ),
+            )
           ],
         ),
       ),

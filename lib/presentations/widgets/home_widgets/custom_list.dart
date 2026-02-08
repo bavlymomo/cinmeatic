@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class CustomeList extends StatelessWidget {
   double screenHeight;
   List<Movie> moviesList;
-  CustomeList({super.key, required this.screenHeight, required this.moviesList});
+  CustomeList(
+      {super.key, required this.screenHeight, required this.moviesList});
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +22,27 @@ class CustomeList extends StatelessWidget {
           itemBuilder: (context, index) {
             Movie movie = moviesList[index];
             return InkWell(
-              onTap: () {
-                
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  movie.image,
-                  fit: BoxFit.cover,
+              onTap: () {},
+              child: Stack(children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    movie.image,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
+                 Positioned(
+                    top: 5,
+                    right: 5,
+                    child: InkWell(
+                      child:const Icon(
+                        Icons.heat_pump_rounded,
+                      ),
+                      onTap: () {
+                        
+                      },
+                    ))
+              ]),
             );
           }),
     );

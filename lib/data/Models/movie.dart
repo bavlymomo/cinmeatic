@@ -1,4 +1,6 @@
-class Movie {
+
+
+class Movie  {
   final int id;
   final String title;
   final String image;
@@ -9,7 +11,7 @@ class Movie {
   final String overview;
   final List<String> genres;
 
-  Movie({
+  const Movie({
     required this.id,
     required this.title,
     required this.image,
@@ -34,4 +36,6 @@ class Movie {
       genres: List<String>.from(json['genres']),
     );
   }
+
+
 }

@@ -4,7 +4,7 @@ class InfoRow extends StatelessWidget {
   double screenHeight;
   double screenWidth;
   String title;
-  InfoRow(
+    InfoRow(
       {required this.screenHeight,
       required this.screenWidth,
       required this.title});

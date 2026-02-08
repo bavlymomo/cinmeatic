@@ -1,11 +1,16 @@
+import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
 import 'package:cinmeatic/presentations/screens/home_page.dart';
 import 'package:cinmeatic/presentations/screens/login.dart';
 import 'package:cinmeatic/presentations/screens/splach.dart';
 import 'package:cinmeatic/presentations/screens/navigation_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(BlocProvider(
+    create: (context) => MoviesCubit(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +31,9 @@ class MyApp extends StatelessWidget {
               labelSmall: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
-                  fontSize: 14))),
+                  fontSize: 14), 
+               
+                  )),
       home: const Splach(),
       routes: {
         '/home': (context) => const HomePage(),
