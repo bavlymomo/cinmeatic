@@ -1,5 +1,8 @@
 import 'package:cinmeatic/data/Models/movie.dart';
 import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
+import 'package:cinmeatic/presentations/widgets/home_widgets/custom_list.dart';
+import 'package:cinmeatic/presentations/widgets/home_widgets/info_row.dart';
+import 'package:cinmeatic/presentations/widgets/movie_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,21 +14,38 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+  TextEditingController? _textEditingController;
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _textEditingController!.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height ;
+    double screenWidth = MediaQuery.of(context).size.width * 0.7;
+
     return Scaffold(
         body: Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           TextField(
+            controller: _textEditingController,
             decoration: const InputDecoration(
                 hint: Text(
-                  "Search by title, gener, actor",
+                  "🔍  Search by title, gener, actor",
                   style: TextStyle(color: Colors.grey),
                 ),
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8)))),
+                    borderRadius: BorderRadius.all(Radius.circular(32)))),
             onChanged: (value) {
               context.read<MoviesCubit>().searchMovie(value);
             },
@@ -33,22 +53,31 @@ class _SearchState extends State<Search> {
           ),
           BlocBuilder<MoviesCubit, MoviesState>(
             builder: (context, state) {
-              // print(state.searchedMovies.length)
-              return Expanded(
-                child: ListView.separated(
-                  itemCount: state.searchedMovies.length,
-                  itemBuilder: (context, index) {
-                    Movie movie = state.searchedMovies[index];
-                    return Text(
-                      movie.title,
-                      style: Theme.of(context).textTheme.labelSmall,
+              return _textEditingController!.text.isEmpty
+                  ? Column(
+                      children: [
+                        InfoRow(screenHeight: screenHeight, screenWidth:screenWidth , title: "Popular "),
+                        CustomeList(
+                            screenHeight: screenHeight * 0.7,
+                            moviesList: state.allmovies.sublist(8, 12)),
+                      ],
+                    )
+                  : Expanded(
+                      child: ListView.separated(
+                        itemCount: state.searchedMovies.length,
+                        itemBuilder: (context, index) {
+                          Movie movie = state.searchedMovies[index];
+                          return Center(
+                              child: MovieButton(
+                            movie: movie,
+                            sizeIcon: screenHeight * 0.045,
+                          ));
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const Divider();
+                        },
+                      ),
                     );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Divider();
-                  },
-                ),
-              );
             },
           )
         ],

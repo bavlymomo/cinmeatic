@@ -25,12 +25,17 @@ class MoviesCubit extends Cubit<MoviesState> {
         : state.allmovies.where((e) {
             return e.title.toLowerCase().contains(query);
           }).toList();
-    print("Query: $query");
-    print("Total movies: ${state.allmovies.length}");
-    print("Filtered movies: ${updatedList.length}");
     emit(MovieUpdate(
       allmovies: state.allmovies,
       searchedMovies: updatedList,
     ));
+  }
+
+  void saveMovie(int id) {
+    List<Movie> updatedList = [];
+    Movie movie = state.allmovies.firstWhere((e) => e.id == id);
+    print(movie.title);
+    updatedList.add(movie);
+    emit(MovieUpdate(allmovies: state.allmovies, savedMovies: updatedList));
   }
 }

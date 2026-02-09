@@ -1,4 +1,5 @@
 import 'package:cinmeatic/data/Models/movie.dart';
+import 'package:cinmeatic/presentations/widgets/movie_button.dart';
 import 'package:flutter/material.dart';
 
 class CustomeList extends StatelessWidget {
@@ -21,28 +22,9 @@ class CustomeList extends StatelessWidget {
           itemCount: moviesList.length,
           itemBuilder: (context, index) {
             Movie movie = moviesList[index];
-            return InkWell(
-              onTap: () {},
-              child: Stack(children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    movie.image,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                 Positioned(
-                    top: 5,
-                    right: 5,
-                    child: InkWell(
-                      child:const Icon(
-                        Icons.heat_pump_rounded,
-                      ),
-                      onTap: () {
-                        
-                      },
-                    ))
-              ]),
+            return MovieButton(
+              movie: movie,
+              sizeIcon: screenHeight * 0.035,
             );
           }),
     );
