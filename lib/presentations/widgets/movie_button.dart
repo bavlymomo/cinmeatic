@@ -37,10 +37,7 @@ class _MovieButtonState extends State<MovieButton> {
                 color: isPressed ? Colors.red : Colors.white,
               ),
               onTap: () {
-                setState(() {
-                  isPressed = !isPressed;
                   context.read<MoviesCubit>().saveMovie(widget.movie.id);
-                });
               },
             ))
       ]),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class InfoRow extends StatelessWidget {
-  double screenHeight;
-  double screenWidth;
-  String title;
-  InfoRow(
-      {required this.screenHeight,
+  final double screenHeight;
+  final double screenWidth;
+  final String title;
+  const InfoRow(
+      {super.key,
+      required this.screenHeight,
       required this.screenWidth,
       required this.title});
 

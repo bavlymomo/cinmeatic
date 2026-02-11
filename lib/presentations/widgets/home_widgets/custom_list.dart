@@ -3,9 +3,9 @@ import 'package:cinmeatic/presentations/widgets/movie_button.dart';
 import 'package:flutter/material.dart';
 
 class CustomeList extends StatelessWidget {
-  double screenHeight;
-  List<Movie> moviesList;
-  CustomeList(
+  final double screenHeight;
+  final List<Movie> moviesList;
+ const CustomeList(
       {super.key, required this.screenHeight, required this.moviesList});
 
   @override

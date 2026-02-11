@@ -1,5 +1,4 @@
 import 'package:cinmeatic/data/Models/movie.dart';
-import 'package:cinmeatic/data/data_source/movie_list_api.dart';
 import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
 import 'package:cinmeatic/presentations/widgets/home_widgets/custom_list.dart';
 import 'package:cinmeatic/presentations/widgets/home_widgets/info_row.dart';
@@ -20,11 +19,11 @@ class _HomePageState extends State<HomePage> {
   List<String> images = List.generate(6, (e) => "images/${e + 1}.jpeg");
   late List<Movie> myMoviesList;
 
-  @override
-  void initState() {
-    super.initState();
-    context.read<MoviesCubit>().fetchMovies();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   context.read<MoviesCubit>().fetchMovies();
+  // }
 
   @override
   Widget build(BuildContext context) {

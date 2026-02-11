@@ -6,12 +6,14 @@ sealed class MoviesState {
   List<Movie> savedMovies;
   final bool isLoading;
   final String? errorMsg;
-  MoviesState(
-      {required this.allmovies,
-      this.isLoading = false,
-      this.errorMsg,
-      this.searchedMovies = const [],
-      this.savedMovies = const []});
+  // List<int> likedMovies;
+  MoviesState({
+    required this.allmovies,
+    this.isLoading = false,
+    this.errorMsg,
+    this.searchedMovies = const [],
+    this.savedMovies = const [],
+  });
 }
 
 final class MoviesInitial extends MoviesState {
@@ -19,11 +21,11 @@ final class MoviesInitial extends MoviesState {
 }
 
 class MovieUpdate extends MoviesState {
-  MovieUpdate(
-      {required super.allmovies,
-      super.isLoading,
-      super.errorMsg,
-      super.searchedMovies ,
-      super.savedMovies
-      });
+  MovieUpdate({
+    required super.allmovies,
+    super.isLoading,
+    super.errorMsg,
+    super.searchedMovies,
+    super.savedMovies,
+  });
 }

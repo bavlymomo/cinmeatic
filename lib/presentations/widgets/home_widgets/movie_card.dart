@@ -2,11 +2,12 @@ import 'package:cinmeatic/data/Models/movie.dart';
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
-  Movie movie;
-  double cardHeight;
-  double screenWidth;
-   MovieCard(
-      {super.key, required this.movie,
+  final Movie movie;
+  final double cardHeight;
+  final double screenWidth;
+  const MovieCard(
+      {super.key,
+      required this.movie,
       required this.cardHeight,
       required this.screenWidth});
 
@@ -68,7 +69,6 @@ class MovieCard extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const Spacer(),
-                     
                       Container(
                         decoration: const BoxDecoration(
                             color: Colors.blueGrey, shape: BoxShape.circle),

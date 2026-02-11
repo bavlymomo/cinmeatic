@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(BlocProvider(
-    create: (context) => MoviesCubit(),
+    create: (context) => MoviesCubit()..fetchMovies(),
     child: const MyApp(),
   ));
 }
@@ -25,15 +25,17 @@ class MyApp extends StatelessWidget {
           textTheme: const TextTheme(
               headlineMedium: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold),
               bodySmall: TextStyle(fontSize: 12, color: Colors.grey),
               labelSmall: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
-                  fontSize: 14), 
-               
-                  )),
+                  fontSize: 14),
+              headlineSmall: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18))),
       home: const Splach(),
       routes: {
         '/home': (context) => const HomePage(),

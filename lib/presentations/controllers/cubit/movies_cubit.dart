@@ -7,13 +7,20 @@ class MoviesCubit extends Cubit<MoviesState> {
   MoviesCubit() : super(MoviesInitial());
 
   void fetchMovies() async {
-    emit(MovieUpdate(allmovies: const [], isLoading: true));
+    emit(MovieUpdate(
+        allmovies: state.allmovies,
+        savedMovies: state.savedMovies,
+        isLoading: true));
     try {
       List<Movie> movies = await MovielistApi.loadJson();
-      emit(MovieUpdate(allmovies: movies, isLoading: false));
+      emit(MovieUpdate(
+          allmovies: movies, savedMovies: state.savedMovies, isLoading: false));
     } catch (e) {
       emit(MovieUpdate(
-          allmovies: const [], isLoading: false, errorMsg: e.toString()));
+          allmovies: state.allmovies,
+          savedMovies: state.savedMovies,
+          isLoading: false,
+          errorMsg: e.toString()));
     }
   }
 
@@ -32,10 +39,11 @@ class MoviesCubit extends Cubit<MoviesState> {
   }
 
   void saveMovie(int id) {
-    List<Movie> updatedList = [];
     Movie movie = state.allmovies.firstWhere((e) => e.id == id);
-    print(movie.title);
-    updatedList.add(movie);
-    emit(MovieUpdate(allmovies: state.allmovies, savedMovies: updatedList));
+    // print()
+    emit(MovieUpdate(
+      allmovies: state.allmovies,
+      savedMovies: [...state.savedMovies, movie],
+    ));
   }
 }
