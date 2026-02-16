@@ -1,13 +1,12 @@
 part of 'movies_cubit.dart';
 
-sealed class MoviesState {
-  List<Movie> allmovies;
-  List<Movie> searchedMovies;
-  List<Movie> savedMovies;
+class MoviesState {
+  final List<Movie> allmovies;
+  final List<Movie> searchedMovies;
+  final List<Movie> savedMovies;
   final bool isLoading;
   final String? errorMsg;
-  // List<int> likedMovies;
-  MoviesState({
+  const MoviesState({
     required this.allmovies,
     this.isLoading = false,
     this.errorMsg,

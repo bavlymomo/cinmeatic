@@ -1,4 +1,5 @@
 import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
+import 'package:cinmeatic/presentations/screens/details.dart';
 import 'package:cinmeatic/presentations/screens/home_page.dart';
 import 'package:cinmeatic/presentations/screens/login.dart';
 import 'package:cinmeatic/presentations/screens/splach.dart';
@@ -22,12 +23,21 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           scaffoldBackgroundColor: const Color(0xff06041F),
+          primaryColor: const Color(0xff1F1D35),
           textTheme: const TextTheme(
+              bodyMedium: TextStyle(color: Colors.white, fontSize: 20),
               headlineMedium: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
                   fontWeight: FontWeight.bold),
-              bodySmall: TextStyle(fontSize: 12, color: Colors.grey),
+              headlineLarge: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+              bodySmall: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w400),
               labelSmall: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
@@ -41,6 +51,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/login': (context) => const Login(),
         '/navigation': (context) => const NavigationPage(),
+        '/details': (context) => const Details(),
       },
     );
   }

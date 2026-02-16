@@ -1,5 +1,7 @@
 import 'package:cinmeatic/data/Models/movie.dart';
+import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieSlide extends StatelessWidget {
   final Movie movie;
@@ -53,7 +55,8 @@ class MovieSlide extends StatelessWidget {
                         ),
                         Text(
                           subtitle,
-                          style: const TextStyle(color: Colors.grey),
+                          style:
+                              const TextStyle(color: Colors.grey, fontSize: 14),
                         ),
                       ],
                     ),
@@ -74,18 +77,51 @@ class MovieSlide extends StatelessWidget {
               Expanded(
                   child: IconButton(
                 icon: const Icon(
-                  Icons.more_vert,
-                  color: Colors.white,
+                  Icons.delete,
+                  color: Colors.white54,
                 ),
                 onPressed: () {
-                  // showDialog(
-                  //   context: context,
-                  //   builder: (context) {
-                  //     return const AlertDialog(
-                  //       title: Text("Do you want to delete this "),
-                  //     );
-                  //   },
-                  // );
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text(
+                          "Delete Movie",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        content: const Text(
+                          "Are you sure",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: const Color(0xff38364C),
+                        actions: [
+                          FilledButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            style: FilledButton.styleFrom(
+                                backgroundColor: Colors.blue),
+                            child: const Text(
+                              "Cancel",
+                            ),
+                          ),
+                          FilledButton(
+                            onPressed: () {
+                              context
+                                  .read<MoviesCubit>()
+                                  .deleteSavedMovie(movie.id);
+                              Navigator.pop(context);
+                            },
+                            style: FilledButton.styleFrom(
+                                backgroundColor: Colors.red),
+                            child: const Text(
+                              "Delete",
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
               )),
             ],

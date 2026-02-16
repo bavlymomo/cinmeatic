@@ -5,6 +5,7 @@ class MovieCard extends StatelessWidget {
   final Movie movie;
   final double cardHeight;
   final double screenWidth;
+
   const MovieCard(
       {super.key,
       required this.movie,
@@ -14,9 +15,9 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          color: Color(0xff1F1D35),
-          borderRadius: BorderRadius.all(Radius.circular(10))),
+      decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          borderRadius: const BorderRadius.all(Radius.circular(8))),
       width: screenWidth * 0.75,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,6 +1,6 @@
+import 'package:equatable/equatable.dart';
 
-
-class Movie  {
+class Movie extends Equatable {
   final int id;
   final String title;
   final String image;
@@ -37,5 +37,8 @@ class Movie  {
     );
   }
 
-
+  @override
+  List<Object?> get props => [
+        id,
+      ];
 }

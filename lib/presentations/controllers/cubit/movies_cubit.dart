@@ -38,12 +38,23 @@ class MoviesCubit extends Cubit<MoviesState> {
     ));
   }
 
-  void saveMovie(int id) {
+  void toggleSaveMovie(int id) {
     Movie movie = state.allmovies.firstWhere((e) => e.id == id);
-    // print()
+    if (state.savedMovies.any((ele) => ele.id == id)) {
+      List<Movie> updatedList =
+          state.savedMovies.where((e) => e.id != id).toList();
+      emit(MovieUpdate(allmovies: state.allmovies, savedMovies: updatedList));
+    } else {
+      emit(MovieUpdate(
+        allmovies: state.allmovies,
+        savedMovies: [...state.savedMovies, movie],
+      ));
+    }
+  }
+
+  void deleteSavedMovie(int id) {
     emit(MovieUpdate(
-      allmovies: state.allmovies,
-      savedMovies: [...state.savedMovies, movie],
-    ));
+        allmovies: state.allmovies,
+        savedMovies: state.savedMovies.where((e) => e.id != id).toList()));
   }
 }
