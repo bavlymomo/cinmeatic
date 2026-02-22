@@ -1,5 +1,5 @@
 import 'package:cinmeatic/data/Models/movie.dart';
-import 'package:cinmeatic/presentations/widgets/home_widgets/movie_button.dart';
+import 'package:cinmeatic/presentations/widgets/movie_button.dart';
 
 import 'package:flutter/material.dart';
 
