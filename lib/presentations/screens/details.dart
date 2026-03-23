@@ -8,10 +8,6 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
-    print('Details screen received movie: ${movie.title}');
-    print('Movie image path: ${movie.image}');
-    print('Movie overview length: ${movie.overview.length}');
-
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
@@ -65,23 +61,23 @@ class Details extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 200), // Spacer instead of Expanded
-            const SizedBox(
+            const SizedBox(height: 50), // Spacer instead of Expanded
+            SizedBox(
               height: 400,
               child: DefaultTabController(
                 length: 3,
                 child: Column(
                   children: [
-                    TabBar(tabs: [
+                    const TabBar(tabs: [
                       Tab(text: "Episode"),
-                      Tab(text: "similar"),
-                      Tab(text: "about"),
+                      Tab(text: "Similar"),
+                      Tab(text: "About"),
                     ]),
                     Expanded(
                       child: TabBarView(children: [
-                        Text("Episode"),
-                        Text("similar"),
-                        Text("about"),
+                        const Center(child: Text("Episode content")),
+                        const Center(child: Text("Similar content")),
+                        About(movie: movie)
                       ]),
                     ),
                   ],
@@ -92,5 +88,56 @@ class Details extends StatelessWidget {
         ),
       ),
     ));
+  }
+}
+
+class About extends StatelessWidget {
+  final Movie movie;
+
+  const About({super.key, required this.movie});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: _speCol(
+                    'Gener',
+                    movie.genres.reduce(
+                      (value, element) => value + element,
+                    )),
+              ),
+              Expanded(child: _speCol('language text', movie.language)),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: _speCol(
+                    'Year', movie.releaseDate.substring(0, 4).toString()),
+              ),
+              Expanded(child: _speCol('Rating', movie.rating.toString())),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _speCol(String title, String content) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+        const SizedBox(height: 5),
+        Text(content,
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold)),
+      ],
+    );
   }
 }
