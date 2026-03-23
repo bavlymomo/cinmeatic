@@ -23,6 +23,8 @@ class _MovieButtonState extends State<MovieButton> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        print('MovieButton clicked: ${widget.movie.title}');
+        print('Movie image path: ${widget.movie.image}');
         Navigator.of(context).pushNamed('/details', arguments: widget.movie);
       },
       child: Stack(children: [
@@ -31,6 +33,16 @@ class _MovieButtonState extends State<MovieButton> {
           child: Image.asset(
             widget.movie.image,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                color: Colors.grey[800],
+                child: const Icon(
+                  Icons.movie,
+                  size: 32,
+                  color: Colors.white54,
+                ),
+              );
+            },
           ),
         ),
         Positioned(

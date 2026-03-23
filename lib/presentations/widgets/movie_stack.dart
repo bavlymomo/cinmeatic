@@ -16,6 +16,18 @@ class MovieStack extends StatelessWidget {
           fit: BoxFit.cover,
           width: screenWidth,
           height: screenHeight * 0.5,
+          errorBuilder: (context, error, stackTrace) {
+            return Container(
+              width: screenWidth,
+              height: screenHeight * 0.5,
+              color: Colors.grey[800],
+              child: const Icon(
+                Icons.movie,
+                size: 64,
+                color: Colors.white54,
+              ),
+            );
+          },
         ),
         Positioned.fill(
             child: Container(
@@ -50,7 +62,7 @@ class MovieStack extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 Text(
-                  "${movie.releaseDate.substring(0, 4)} . ${movie.genres.join(' , ')} . ${movie.duration}",
+                  "${movie.releaseDate.length >= 4 ? movie.releaseDate.substring(0, 4) : 'N/A'} . ${movie.genres.join(' , ')} . ${movie.duration}",
                   style: Theme.of(context).textTheme.bodySmall,
                 )
               ],

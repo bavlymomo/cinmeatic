@@ -1,9 +1,10 @@
 import 'package:cinmeatic/data/Models/movie.dart';
 import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
-import 'package:cinmeatic/presentations/widgets/home_widgets/custom_list.dart';
-import 'package:cinmeatic/presentations/widgets/home_widgets/info_row.dart';
-import 'package:cinmeatic/presentations/widgets/home_widgets/movie_card.dart';
-import 'package:cinmeatic/presentations/widgets/home_widgets/my_carousel_slider.dart';
+import 'package:cinmeatic/presentations/widgets/custom_list.dart';
+import 'package:cinmeatic/presentations/widgets/info_row.dart';
+import 'package:cinmeatic/presentations/widgets/movie_card.dart';
+import 'package:cinmeatic/presentations/widgets/my_carousel_slider.dart';
+
 // import 'package:cinmeatic/presentations/widgets/home_widgets/movie_button.dart';
 
 import 'package:flutter/material.dart';

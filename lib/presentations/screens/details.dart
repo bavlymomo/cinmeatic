@@ -8,6 +8,9 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
+    print('Details screen received movie: ${movie.title}');
+    print('Movie image path: ${movie.image}');
+    print('Movie overview length: ${movie.overview.length}');
 
     return Scaffold(
         body: SafeArea(
@@ -62,20 +65,26 @@ class Details extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
               textAlign: TextAlign.center,
             ),
-            const Expanded(
+            const SizedBox(height: 200), // Spacer instead of Expanded
+            const SizedBox(
+              height: 400,
               child: DefaultTabController(
                 length: 3,
-                child: Scaffold(
-                  appBar: TabBar(tabs: [
-                    Tab(text: "Episode"),
-                    Tab(text: "similar"),
-                    Tab(text: "about"),
-                  ]),
-                  body: TabBarView(children: [
-                    Text("Episode"),
-                    Text("similar"),
-                    Text("about"),
-                  ]),
+                child: Column(
+                  children: [
+                    TabBar(tabs: [
+                      Tab(text: "Episode"),
+                      Tab(text: "similar"),
+                      Tab(text: "about"),
+                    ]),
+                    Expanded(
+                      child: TabBarView(children: [
+                        Text("Episode"),
+                        Text("similar"),
+                        Text("about"),
+                      ]),
+                    ),
+                  ],
                 ),
               ),
             )
