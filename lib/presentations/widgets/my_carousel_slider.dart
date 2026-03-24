@@ -25,6 +25,6 @@ class Mycarouselslider extends StatelessWidget {
             ),
           );
         }).toList());
-    ;
+    
   }
 }

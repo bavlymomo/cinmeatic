@@ -30,9 +30,6 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width * 0.7;
-
     return Scaffold(
         body: Column(
       children: [
@@ -55,14 +52,10 @@ class _SearchState extends State<Search> {
             return _textEditingController!.text.isEmpty
                 ? Column(
                     children: [
-                      InfoRow(
-                          screenHeight: screenHeight,
-                          screenWidth: screenWidth,
-                          title: "Popular "),
+                      const InfoRow(
+                          title: "Popular",),
                       CustomeList(
-                        screenHeight: screenHeight * 0.7,
                         moviesList: state.allmovies.sublist(8, 12),
-                        likedMovies: state.savedMovies,
                       ),
                     ],
                   )
@@ -74,8 +67,7 @@ class _SearchState extends State<Search> {
                         return Center(
                             child: MovieButton(
                           movie: movie,
-                          sizeIcon: screenHeight * 0.045,
-                          likedMovies: state.savedMovies,
+                        
                         ));
                       },
                       separatorBuilder: (BuildContext context, int index) {

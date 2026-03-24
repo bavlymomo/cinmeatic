@@ -1,27 +1,25 @@
+import 'package:cinmeatic/core/constants.dart';
 import 'package:cinmeatic/data/Models/movie.dart';
 import 'package:cinmeatic/presentations/widgets/movie_button.dart';
 
 import 'package:flutter/material.dart';
 
 class CustomeList extends StatelessWidget {
-  final List<Movie> likedMovies;
-  final double screenHeight;
   final List<Movie> moviesList;
-  const CustomeList(
-      {super.key,
-      required this.screenHeight,
-      required this.moviesList,
-      required this.likedMovies});
+  const CustomeList({
+    super.key,
+    required this.moviesList,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: screenHeight * 0.30,
+      height: AppConstants(context).posterHeight,
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
           separatorBuilder: (context, index) {
             return const SizedBox(
-              width: 16,
+              width: AppConstants.spaceMedium,
             );
           },
           itemCount: moviesList.length,
@@ -29,8 +27,6 @@ class CustomeList extends StatelessWidget {
             Movie movie = moviesList[index];
             return MovieButton(
               movie: movie,
-              sizeIcon: screenHeight * 0.035,
-              likedMovies: likedMovies,
             );
           }),
     );

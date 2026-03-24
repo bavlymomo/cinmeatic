@@ -1,12 +1,10 @@
+import 'package:cinmeatic/core/constants.dart';
 import 'package:cinmeatic/data/Models/movie.dart';
 import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
 import 'package:cinmeatic/presentations/widgets/custom_list.dart';
 import 'package:cinmeatic/presentations/widgets/info_row.dart';
 import 'package:cinmeatic/presentations/widgets/movie_card.dart';
 import 'package:cinmeatic/presentations/widgets/my_carousel_slider.dart';
-
-// import 'package:cinmeatic/presentations/widgets/home_widgets/movie_button.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,10 +21,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    double cardHeight = screenHeight * 0.35;
-
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
@@ -56,12 +50,9 @@ class _HomePageState extends State<HomePage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    InfoRow(
-                        screenHeight: screenHeight,
-                        screenWidth: screenWidth,
-                        title: "Last watched"),
+                    const InfoRow(title: "Last watched"),
                     SizedBox(
-                      height: cardHeight,
+                      height: AppConstants(context).movieCardHeight,
                       child: ListView.separated(
                         itemCount: lessMovies.length,
                         scrollDirection: Axis.horizontal,
@@ -69,36 +60,26 @@ class _HomePageState extends State<HomePage> {
                           Movie movie = lessMovies[index];
                           return MovieCard(
                             movie: movie,
-                            cardHeight: cardHeight,
-                            screenWidth: screenWidth,
                           );
                         },
                         separatorBuilder: (BuildContext context, int index) {
                           return const SizedBox(
-                            width: 20,
+                            width: AppConstants.spaceMedium,
                           );
                         },
                       ),
                     ),
-                    InfoRow(
-                      screenHeight: screenHeight,
-                      screenWidth: screenWidth,
+                    const InfoRow(
                       title: 'Latest Movies',
                     ),
                     CustomeList(
-                      screenHeight: screenHeight,
                       moviesList: latestMovie,
-                      likedMovies: state.savedMovies,
                     ),
-                    InfoRow(
-                      screenHeight: screenHeight,
-                      screenWidth: screenWidth,
+                    const InfoRow(
                       title: 'Most Popular',
                     ),
                     CustomeList(
-                      screenHeight: screenHeight,
                       moviesList: mostPopular,
-                      likedMovies: state.savedMovies,
                     ),
                   ],
                 );

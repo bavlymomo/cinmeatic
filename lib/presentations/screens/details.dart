@@ -1,5 +1,6 @@
 import 'package:cinmeatic/data/Models/movie.dart';
 import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
+import 'package:cinmeatic/presentations/widgets/movie_button.dart';
 import 'package:cinmeatic/presentations/widgets/movie_card.dart';
 import 'package:cinmeatic/presentations/widgets/movie_stack.dart';
 import 'package:flutter/material.dart';
@@ -24,47 +25,7 @@ class Details extends StatelessWidget {
           spacing: 16,
           children: [
             MovieStack(movie: movie),
-            Row(
-              children: [
-                Expanded(
-                  child: FilledButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/login');
-                      },
-                      style: FilledButton.styleFrom(
-                        backgroundColor: Colors.red,
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.play_arrow),
-                          Text(
-                            " Play",
-                          ),
-                        ],
-                      )),
-                ),
-                const SizedBox(
-                  width: 24,
-                ),
-                Expanded(
-                  child: FilledButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/login');
-                      },
-                      style: FilledButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.download),
-                          Text(" Download"),
-                        ],
-                      )),
-                ),
-              ],
-            ),
+            _buttonRow(context),
             Text(
               movie.overview,
               style: Theme.of(context).textTheme.bodySmall,
@@ -85,22 +46,21 @@ class Details extends StatelessWidget {
                     Expanded(
                       child: TabBarView(children: [
                         const Center(child: Text("Episode content")),
-                        GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    childAspectRatio: 14 / 19,
-                                    mainAxisSpacing: 8,
-                                    crossAxisSpacing: 8),
-                            itemCount: similarMovies.length,
-                            itemBuilder: (context, index) {
-                              Movie movie = similarMovies[index];
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child:
-                                    Image.asset(movie.image, fit: BoxFit.cover),
-                              );
-                            }),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GridView.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      childAspectRatio: 3 / 4,
+                                      mainAxisSpacing: 8,
+                                      crossAxisSpacing: 8),
+                              itemCount: similarMovies.length,
+                              itemBuilder: (context, index) {
+                                Movie movie = similarMovies[index];
+                                return MovieButton(movie: movie);
+                              }),
+                        ),
                         About(movie: movie)
                       ]),
                     ),
@@ -112,6 +72,46 @@ class Details extends StatelessWidget {
         ),
       ),
     ));
+  }
+
+  Widget _buttonRow(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: FilledButton(
+              onPressed: () {},
+              style: FilledButton.styleFrom(
+                backgroundColor: Colors.red,
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.play_arrow),
+                  Text(
+                    " Play",
+                  ),
+                ],
+              )),
+        ),
+        const SizedBox(
+          width: 24,
+        ),
+        Expanded(
+          child: FilledButton(
+              onPressed: () {},
+              style: FilledButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.download),
+                  Text(" Download"),
+                ],
+              )),
+        ),
+      ],
+    );
   }
 }
 

@@ -1,16 +1,14 @@
+import 'package:cinmeatic/core/constants.dart';
 import 'package:cinmeatic/data/Models/movie.dart';
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
-  final double cardHeight;
-  final double screenWidth;
 
-  const MovieCard(
-      {super.key,
-      required this.movie,
-      required this.cardHeight,
-      required this.screenWidth});
+  const MovieCard({
+    super.key,
+    required this.movie,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +19,18 @@ class MovieCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            borderRadius: const BorderRadius.all(Radius.circular(8))),
-        width: screenWidth * 0.75,
+            borderRadius: const BorderRadius.all(
+                Radius.circular(AppConstants.radiusSmall))),
+        width: AppConstants(context).movieCardWidth,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Photo
             AspectRatio(
-              aspectRatio: 16 / 9,
+              aspectRatio: AppConstants(context).backdropAspectRatio,
               child: ClipRRect(
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(10)),
+                borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(AppConstants.radiusSmall)),
                 child: Image.asset(
                   movie.image,
                   fit: BoxFit.cover,
@@ -52,14 +51,15 @@ class MovieCard extends StatelessWidget {
             // Text
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(AppConstants.spaceSmall),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // title
                     Padding(
-                      padding: EdgeInsets.only(
-                          top: cardHeight * 0.01, bottom: cardHeight * 0.02),
+                      padding: const EdgeInsets.only(
+                          top: AppConstants.spaceSmall,
+                          bottom: AppConstants.spaceSmall),
                       child: Text(
                         movie.title,
                         style: const TextStyle(

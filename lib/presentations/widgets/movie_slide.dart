@@ -1,3 +1,4 @@
+import 'package:cinmeatic/core/constants.dart';
 import 'package:cinmeatic/data/Models/movie.dart';
 import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class MovieSlide extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
             color: Color(0xff1F1D35),
-            borderRadius: BorderRadius.all(Radius.circular(16))),
+            borderRadius: BorderRadius.all(Radius.circular(AppConstants.radiusMedium))),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

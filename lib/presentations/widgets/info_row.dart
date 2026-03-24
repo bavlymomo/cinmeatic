@@ -1,20 +1,15 @@
+import 'package:cinmeatic/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class InfoRow extends StatelessWidget {
-  final double screenHeight;
-  final double screenWidth;
   final String title;
-  const InfoRow(
-      {super.key,
-      required this.screenHeight,
-      required this.screenWidth,
-      required this.title});
+  const InfoRow({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(
-            top: screenHeight * 0.05, bottom: screenHeight * 0.02),
+        padding: const EdgeInsets.only(
+            top: AppConstants.spaceSmall, bottom: AppConstants.spaceSmall),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
