@@ -23,8 +23,6 @@ class _MovieButtonState extends State<MovieButton> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('MovieButton clicked: ${widget.movie.title}');
-        print('Movie image path: ${widget.movie.image}');
         Navigator.of(context).pushNamed('/details', arguments: widget.movie);
       },
       child: Stack(children: [

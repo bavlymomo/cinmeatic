@@ -1,6 +1,9 @@
 import 'package:cinmeatic/data/Models/movie.dart';
+import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
+import 'package:cinmeatic/presentations/widgets/movie_card.dart';
 import 'package:cinmeatic/presentations/widgets/movie_stack.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Details extends StatelessWidget {
   const Details({super.key});
@@ -8,6 +11,12 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
+    final List<Movie> similarMovies = context
+        .read<MoviesCubit>()
+        .state
+        .allmovies
+        .where((e) => e.genres.any((e) => movie.genres.contains(e)))
+        .toList();
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
@@ -76,7 +85,22 @@ class Details extends StatelessWidget {
                     Expanded(
                       child: TabBarView(children: [
                         const Center(child: Text("Episode content")),
-                        const Center(child: Text("Similar content")),
+                        GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3,
+                                    childAspectRatio: 14 / 19,
+                                    mainAxisSpacing: 8,
+                                    crossAxisSpacing: 8),
+                            itemCount: similarMovies.length,
+                            itemBuilder: (context, index) {
+                              Movie movie = similarMovies[index];
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child:
+                                    Image.asset(movie.image, fit: BoxFit.cover),
+                              );
+                            }),
                         About(movie: movie)
                       ]),
                     ),
@@ -101,15 +125,13 @@ class About extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        spacing: 16,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: _speCol(
-                    'Gener',
-                    movie.genres.reduce(
-                      (value, element) => value + element,
-                    )),
+                child: _speCol('Gener', movie.genres.join(', ')),
               ),
               Expanded(child: _speCol('language text', movie.language)),
             ],

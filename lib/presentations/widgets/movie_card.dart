@@ -16,8 +16,6 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('MovieCard clicked: ${movie.title}');
-        print('Movie image path: ${movie.image}');
         Navigator.of(context).pushNamed('/details', arguments: movie);
       },
       child: Container(

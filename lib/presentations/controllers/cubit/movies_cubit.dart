@@ -57,4 +57,5 @@ class MoviesCubit extends Cubit<MoviesState> {
         allmovies: state.allmovies,
         savedMovies: state.savedMovies.where((e) => e.id != id).toList()));
   }
+  
 }
