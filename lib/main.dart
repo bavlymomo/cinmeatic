@@ -1,3 +1,4 @@
+import 'package:cinmeatic/Presentations/Screens/download.dart';
 import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
 import 'package:cinmeatic/presentations/screens/details.dart';
 import 'package:cinmeatic/presentations/screens/home_page.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const Login(),
         '/navigation': (context) => const NavigationPage(),
         '/details': (context) => const Details(),
+        '/downloads': (context) => const Download(),
       },
     );
   }

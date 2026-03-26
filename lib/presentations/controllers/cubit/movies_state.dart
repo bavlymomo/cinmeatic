@@ -4,6 +4,7 @@ class MoviesState {
   final List<Movie> allmovies;
   final List<Movie> searchedMovies;
   final List<Movie> savedMovies;
+  final List<Movie> downloadedMovies;
   final bool isLoading;
   final String? errorMsg;
   const MoviesState({
@@ -12,6 +13,7 @@ class MoviesState {
     this.errorMsg,
     this.searchedMovies = const [],
     this.savedMovies = const [],
+    this.downloadedMovies =  const [],
   });
 }
 
@@ -26,5 +28,6 @@ class MovieUpdate extends MoviesState {
     super.errorMsg,
     super.searchedMovies,
     super.savedMovies,
+    super.downloadedMovies,
   });
 }

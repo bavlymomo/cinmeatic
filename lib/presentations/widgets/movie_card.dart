@@ -1,6 +1,8 @@
 import 'package:cinmeatic/core/constants.dart';
 import 'package:cinmeatic/data/Models/movie.dart';
+import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -92,7 +94,31 @@ class MovieCard extends StatelessWidget {
                           child: IconButton(
                             padding: EdgeInsets.zero,
                             iconSize: 20,
-                            onPressed: () {},
+                            onPressed: () {
+                              context
+                                  .read<MoviesCubit>()
+                                  .downloadMovie(movie.id);
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    backgroundColor: const Color(0xff38364C),
+                                    content: const Text(
+                                      "Downloaded ",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    actions: [
+                                      FilledButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pushNamed('/downloads');
+                                          },
+                                          child: const Text("Go to Downloads"))
+                                    ],
+                                  );
+                                },
+                              );
+                            },
                             icon: const Icon(
                               Icons.download,
                               color: Colors.white70,

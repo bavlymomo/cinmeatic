@@ -1,5 +1,8 @@
+import 'package:cinmeatic/core/constants.dart';
 import 'package:cinmeatic/data/Models/movie.dart';
+import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieStack extends StatelessWidget {
   final Movie movie;
@@ -7,19 +10,17 @@ class MovieStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
     return Stack(
       children: [
         Image.asset(
           movie.image,
           fit: BoxFit.cover,
-          width: screenWidth,
-          height: screenHeight * 0.5,
+          width: AppConstants(context).width,
+          height: AppConstants(context).height * 0.5,
           errorBuilder: (context, error, stackTrace) {
             return Container(
-              width: screenWidth,
-              height: screenHeight * 0.5,
+              width: AppConstants(context).width,
+              height: AppConstants(context).height * 0.5,
               color: Colors.grey[800],
               child: const Icon(
                 Icons.movie,
@@ -49,6 +50,42 @@ class MovieStack extends StatelessWidget {
                 icon: const Icon(
                   Icons.arrow_back,
                   color: Colors.white,
+                ))),
+        Positioned(
+            top: 0,
+            right: 8,
+            child: IconButton(
+                style: IconButton.styleFrom(backgroundColor: Colors.black54),
+                onPressed: () {
+                  context.read<MoviesCubit>().toggleSaveMovie(movie.id);
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        backgroundColor: const Color(0xff38364C),
+                        content: Text(
+                          context
+                                  .read<MoviesCubit>()
+                                  .state
+                                  .savedMovies
+                                  .contains(movie)
+                              ? "Movie Saved"
+                              : "Movie Removed",
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      );
+                    },
+                  );
+                },
+                icon: BlocBuilder<MoviesCubit, MoviesState>(
+                  builder: (context, state) {
+                    return Icon(
+                      state.savedMovies.contains(movie)
+                          ? Icons.bookmark
+                          : Icons.bookmark_outline,
+                      color: Colors.white,
+                    );
+                  },
                 ))),
         Positioned(
             bottom: 0,

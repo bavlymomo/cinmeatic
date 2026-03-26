@@ -1,7 +1,9 @@
+import 'dart:ffi';
+
+import 'package:cinmeatic/core/constants.dart';
 import 'package:cinmeatic/data/Models/movie.dart';
 import 'package:cinmeatic/presentations/controllers/cubit/movies_cubit.dart';
 import 'package:cinmeatic/presentations/widgets/movie_button.dart';
-import 'package:cinmeatic/presentations/widgets/movie_card.dart';
 import 'package:cinmeatic/presentations/widgets/movie_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +24,7 @@ class Details extends StatelessWidget {
         body: SafeArea(
       child: SingleChildScrollView(
         child: Column(
-          spacing: 16,
+          spacing: AppConstants.spaceLarge,
           children: [
             MovieStack(movie: movie),
             _buttonRow(context),
@@ -31,36 +33,32 @@ class Details extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 50), // Spacer instead of Expanded
+            // const SizedBox(
+            //   height: AppConstants.spaceMedium,
+            // ), // Spacer instead of Expanded
             SizedBox(
-              height: 400,
+              height: AppConstants(context).tabHeight,
               child: DefaultTabController(
                 length: 3,
                 child: Column(
                   children: [
-                    const TabBar(tabs: [
-                      Tab(text: "Episode"),
-                      Tab(text: "Similar"),
-                      Tab(text: "About"),
-                    ]),
+                    const TabBar(
+                        dividerColor: Colors.transparent,
+                        labelStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red),
+                        indicatorColor: Colors.red,
+
+                        tabs: [
+                          Tab(text: "Episode"),
+                          Tab(text: "Similar"),
+                          Tab(text: "About"),
+                        ]),
                     Expanded(
                       child: TabBarView(children: [
                         const Center(child: Text("Episode content")),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GridView.builder(
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      childAspectRatio: 3 / 4,
-                                      mainAxisSpacing: 8,
-                                      crossAxisSpacing: 8),
-                              itemCount: similarMovies.length,
-                              itemBuilder: (context, index) {
-                                Movie movie = similarMovies[index];
-                                return MovieButton(movie: movie);
-                              }),
-                        ),
+                        Similar(similarMovies: similarMovies),
                         About(movie: movie)
                       ]),
                     ),
@@ -94,7 +92,7 @@ class Details extends StatelessWidget {
               )),
         ),
         const SizedBox(
-          width: 24,
+          width: AppConstants.spaceLarge,
         ),
         Expanded(
           child: FilledButton(
@@ -160,6 +158,29 @@ class About extends StatelessWidget {
             style: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ],
+    );
+  }
+}
+
+class Similar extends StatelessWidget {
+  final List<Movie> similarMovies;
+  const Similar({super.key, required this.similarMovies});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(AppConstants.spaceSmall),
+      child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: AppConstants(context).posterAspectRatio,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8),
+          itemCount: similarMovies.length,
+          itemBuilder: (context, index) {
+            Movie movie = similarMovies[index];
+            return MovieButton(movie: movie);
+          }),
     );
   }
 }

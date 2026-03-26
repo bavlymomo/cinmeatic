@@ -15,6 +15,7 @@ class AppConstants {
   static const double spaceMedium = 16.0;
   static const double spaceLarge = 24.0;
   static const double spaceExtraLarge = 32.0;
+  static const double spaceHuge = 40.0;
 
   // 3. أحجام الصور (Image Ratios & Heights)
   // هنا بنحط أرقام ثابتة للأجزاء اللي محتاجة استقرار
@@ -23,6 +24,7 @@ class AppConstants {
   double get posterAspectRatio => 2 / 3; // نسبة البوستر الطولي
   double get backdropAspectRatio => 16 / 9; // نسبة الخلفية العرضية
   double get posterHeight => 200; // ارتفاع البوستر بيكون 40% من عرض الشاشة
+  double get tabHeight => 400.0; // ارتفاع التاب الثابت
   // 4. أحجام الأيقونات (Icon Sizes)
   static const double iconSmall = 18.0;
   static const double iconMedium = 24.0;
