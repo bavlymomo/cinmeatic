@@ -20,9 +20,14 @@ class InfoRow extends StatelessWidget {
             TextButton(
                 style: TextButton.styleFrom(padding: EdgeInsets.zero),
                 onPressed: () {},
-                child: Text(
-                  "See All",
-                  style: Theme.of(context).textTheme.labelSmall,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/see-all');
+                  },
+                  child: Text(
+                    "See All",
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
                 ))
           ],
         ));

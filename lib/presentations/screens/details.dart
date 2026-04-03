@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:cinmeatic/core/constants.dart';
 import 'package:cinmeatic/data/Models/movie.dart';
